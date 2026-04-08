@@ -129,7 +129,8 @@
 
         #map {
             width: 100%;
-            height: 100%;
+            flex: 1;
+            min-height: 300px;
             background-color: #ffffff;
         }
 
@@ -236,6 +237,10 @@
 
             .map-wrapper {
                 min-height: 360px;
+            }
+
+            #map {
+                min-height: 320px;
             }
 
             .header h1 {
@@ -392,6 +397,12 @@
             zoomControl:false, maxZoom:28, minZoom:1
         }).fitBounds([[1.1949288256259443,124.74371179611852],[1.254888943755988,124.82852083295693]]);
         var hash = new L.Hash(map);
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 200);
+        window.addEventListener('resize', function() {
+            map.invalidateSize();
+        });
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         // remove popup's row if "visible-with-data"
